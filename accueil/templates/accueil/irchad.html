@@ -1,0 +1,167 @@
+{% extends "accueil/inscription.html" %}
+{% load static %}
+{% block title %} Se Connecter {% endblock %}
+{% block include %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'chat/chat.css' %}" />
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+{% endblock %}
+{% block title2 %}
+{% if must_create_session %}
+Déposez Votre CV
+{% else %}
+Bienvenue dans votre session !
+{% endif %}
+{% endblock %}
+{% block body %}
+<!--________________________________CHAT BLOCK_______________________________-->
+{% if connected %}
+
+    {% if must_create_session != True %}
+    <h1> </h1>
+    <p hidden id="nombreMessage" class="0">0</p>
+    <div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card chat-app">
+                <div id="plist" class="people-list">
+                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                        <li class="clearfix">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                            <div class="about">
+                                <div class="name"></div>
+                                <div class="status"> <i class="fa fa-circle online"></i>Ressource humaine</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+                <!-- ////////////////////////////////////////////// Partie Chat /////////////////////////////////////////////// -->
+
+                <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                <script>
+                    $(document).ready(function(){
+                    setInterval(function(){
+                        $.ajax({
+                            type: 'GET',
+                            url : "/getMessages/{{session_id}}",
+                            success: function(response){
+
+                                $("#display").empty();
+                                console.log("nombre message "+document.getElementById("nombreMessage").className);
+                                var nombreMessage = parseInt(document.getElementById("nombreMessage").className);
+                                console.log("Nombre Message :"+nombreMessage);
+                                var newNumber = 0;
+                                var i = 0;
+                                for (var key in response.messages)
+                                {
+                                    if (i>=nombreMessage)
+                                    {
+                                        if (response.messages[key].fields.messageFromRh)
+                                        {
+                                        var temp = "<li class='clearfix'><div class='other-message float-left'><i class=' bi bi-file-earmark-arrow-up-fill'></i>"+response.messages[key].fields.contenu+"</div></li>"
+                                        $("#chatMessages").append(temp);
+                                        newNumber++;
+                                        document.getElementById("nombreMessage").className=newNumber.toString();
+                                        }
+                                        else
+                                        {
+                                        var temp = "<li class='clearfix'><div class='message my-message'><i class=' bi bi-file-earmark-arrow-up-fill'></i>"+response.messages[key].fields.contenu+"</div></li>"
+                                        $("#chatMessages").append(temp);
+                                        newNumber++;
+                                        document.getElementById("nombreMessage").className=newNumber.toString();
+                                        }
+                                    }
+                                    i++;
+                                }
+                            }/*,
+                            error: function(response){
+                                alert('An error occured')
+                            }*/
+                        });
+                    },500);
+                    })
+        </script>
+
+                <div class="chat">
+                    <div class="chat-history">
+                        <ul class="m-b-0" id="chatMessages">
+                            <li class="clearfix">
+                                <div class="message other-message float-left">
+                                    Salut {{username}} , Bienvenue encore une fois dans notre Service de Correction de CV , veuillez déja
+                                     deposer Votre CV !
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="chat-message clearfix">
+                        <form id="post-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="username" id="username" value="{{username}}"/>
+                            <input type="hidden" name="session_id" id="session_id" value="{{session_id}}"/>
+                            <div class="input-group mb-0">
+                                <div class="input-group-prepend">
+                                    <button type="submit" style="border-style:none;background-color:none"><span class="input-group-text" ><i class="fa fa-send"></i></span></button>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Enterer Message Ici ..." id="message" name="message">
+                            </div>
+                        </form>
+                    </div>
+                    <script type="text/javascript">
+                      $(document).on('submit','#post-form',function(e){
+                        e.preventDefault();
+
+                        $.ajax({
+                          type:'POST',
+                          url:'/send',
+                          data:{
+                              username:$('#username').val(),
+                              session_id:$('#session_id').val(),
+                              message:$('#message').val(),
+                            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                          },
+                          success: function(data){
+                             location.reload();
+                          }
+                        });
+                        document.getElementById('message').value = ''
+                      });
+                    </script>
+                    <script>
+                        document.getElementById("message").scrollIntoView();
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--_____________________________START CHAT BLOCK________________________-->
+    {% else %}
+    {% if form_extension_valid == False%}
+    <style>
+        #fileupload {border-color:red;}
+    </style>
+    {% endif %}
+    <div class="container mx-auto text-center" style="border-radius:10px;background-color:rgba(222,252,224,0.5)">
+        <h2>  </h2>
+        <div class="mx-auto container">
+           <form method="post" action="{% url 'irchad' 0 %}" enctype="multipart/form-data">
+               {%csrf_token%}
+            <table>
+                <tr><th> <label for="fileupload" > Votre CV : </label></th><td> {{form.file}}</td>{% if form_extension_valid == False %}<td class="text-danger">Veuillez mettre un bon format de fichier(.JPEG , .PNG , .PDF , .JPG , .WORD)</td>{% endif %}</tr>
+                <tr><td colspan="2"> <input type="submit" value="envoyer" class="btn btn-success"/> </td></tr>
+            </table>
+        </form>
+        </div>
+    </div>
+
+    {% endif %}
+
+{% else %}
+    <div>
+        Description de irchad plus button pour s'inscrir !
+    </div>
+{% endif %}
+{% endblock %}

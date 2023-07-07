@@ -1,0 +1,51 @@
+{% extends "accueil/inscription.html" %}
+{% load static %}
+{% block title %} Se Connecter {% endblock %}
+{% block include %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assetinscription/css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assetinscription/fonts/line-awesome/css/line-awesome.min.css' %}">
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+    <link rel="stylesheet" href="{% static 'assetinscription/css/style.css' %} "/>
+{% endblock %}
+
+{% block title2 %}VEUILLEZ VOUS CONNECTER POUR AVOIR PLUS D'ACCES {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="form-v7-content">
+            <div class="form-left">
+                <img src="{% static 'assetinscription/images/form-v7.jpg' %}" alt="form">
+                <p class="text-1"> Se Connecter</p>
+                <!--<p class="text-2">Privaci policy & Term of service</p>-->
+            </div>
+                <style>
+                    {% if error_connection %}
+                        #username{border-bottom-color:red;}
+                        #password{border-bottom-color:red;}
+                    {% endif %}
+                </style>
+                <form class="form-detail" action="{% url 'seConnecter' %}" method="post" id="myform">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <label for="username">Nom D'utilisateur</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form-row">
+                        <label for="password">Mot de Passe</label>
+                        {{form.mdp}}
+                    </div>
+                    <div class="form-row-last">
+                        <input type="submit" name="register" class="register" value="Se Connecter">
+                        <p>Ou<a href="{% url 'inscription'%}">S'enregistrer</a></p>
+                    </div>
+                </form>
+                <script>
+                        {% if error_connection %}
+                            document.getElementById("password").placeholder="Mot de Passe Incorrect :/";
+                            document.getElementById("username").value="";
+                            document.getElementById("username").placeholder="nom d'utilisateur Ou ";
+                        {% endif %}
+                    </script>
+        </div>
+    </div>
+
+{% endblock %}

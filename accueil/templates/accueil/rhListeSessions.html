@@ -1,0 +1,109 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="{% static 'img/IRCHAD_LOGO.PNG'%}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <link rel="stylesheet" href="{% static 'assets1/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets1/css/baguetteBox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assests1/css/dh-row-text-image-right-responsive.css'%}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic&amp;display=swap">
+    {% block include %}
+        <link rel="stylesheet" type="text/css" href="{% static 'assetinscription/css/opensans-font.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assetinscription/fonts/line-awesome/css/line-awesome.min.css' %}">
+        <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+        <link rel="stylesheet" href="{% static 'assetinscription/css/style.css' %} "/>
+    {% endblock %}
+
+    <title>Irchad Wa Tawjih- {% block title %}Liste de Sessions {% endblock %}</title>
+</head>
+<style>
+        //#mainNav {background-color:#197132}
+        // Remy function
+    </style>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57" style="--bs-primary: #268504;--bs-primary-rgb: 38,133,4;">
+    <nav id="mainNav" class="navbar navbar-light navbar-expand-lg fixed-top">
+        <div class="container"><a class="navbar-brand" href="{% url 'accueil' %}"><img src="{% static 'img/IRCHAD_LOGO.PNG'%}" style="width:100px;height:100px"/></a><button class="navbar-toggler navbar-toggler-right" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
+            <div id="navbarResponsive" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'listSessions' %}">SESSIONS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="">Tawjih</a></li>
+                    {% if connected == False %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'seConnecter' %}">CONNECTION</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'deconnection' %}">déCONNECTION</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="text-white" style="color: rgb(0,0,0);background: rgb(2,108,0);--bs-primary: #268504;--bs-primary-rgb: 38,133,4;">
+        <div class="container my-auto">
+
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <h1 class="text-uppercase text-center !"><strong><br><strong>{% block title2 %}LISTES DES SESSIONS {% endblock %}</strong><br><br></strong></h1>
+                        <hr>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    {% block body %}
+        <section class="container mx-auto">
+    <h1 class="text-center" style="font-family:RoguelandFreeRegular-lgBowimport;"></h1>
+    <table class="table table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Etat</th>
+          <th scope="col">CV Ajouté</th>
+          <th scope="col">Date </th>
+          <th scope="col">Username </th>
+            <th scope="col">RH</th>
+            <th scope="col">Conversation </th>
+        </tr>
+      </thead>
+      <tbody class="">
+        {% for session in listSessionss %}
+            {% if session.etat == False %}
+            <tr class="table-danger">
+              <td>En Cours <img src="{% static 'img/statusOrange.png'%}"/></td>
+              <td>{% if session.cvUploaded%}Oui{% else %}Non{% endif %}</td>
+              <td> {{ session.date | date}}</td>
+              <td>{{ session.usernameUser }} </td>
+                <td>{{ session.usernameRh }}</td>
+              <td><a style="color:green" href="{% url 'sessionRh' session.hashed_id %}">
+                  <img src="{% static 'img/conversation.png'%}"/></a>
+              </td>
+            </tr>
+
+        {% else %}
+            <tr class="table-success">
+              <td>Traité <img src="{% static 'img/checked.png'%}"/></td>
+              <td>{% if session.cvUploaded%}Oui{% else %}Non{% endif %}</td>
+              <td> {{ session.date | date}}</td>
+              <td>{{ session.usernameUser }} </td>
+                <td>{{session.usernameRh}}</td>
+              <td><a style="color:green" href="{% url 'sessionRh' session.hashed_id %}">
+                  <img src="{% static 'img/conversation.png'%}"/></a>
+              </td>
+            </tr>
+            {%endif%}
+        {% endfor %}
+      </tbody>
+    </table>
+</section>
+
+    {% endblock %}
+<script src="{% static 'assets1/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets1/js/baguetteBox.min.js' %}"></script>
+    <script src="{% static 'assets1/js/creative.js' %}"></script>
+</body>
+
+</html>
+
+
+
