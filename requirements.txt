@@ -11,4 +11,4 @@ whitenoise==6.5.0
 Pillow==9.1.0
 psycopg2-binary==2.9.1
 django-static-fontawesome==5.14.0.0
-password_strength==0.0.1
+

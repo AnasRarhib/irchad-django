@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
-from password_strength import PasswordPolicy
+#from password_strength import PasswordPolicy
 from django.contrib.auth import logout,authenticate, login
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
@@ -60,7 +60,7 @@ def inscription(request):
                 email_exists = True
                 return render(request, 'accueil/inscription.html', locals())
         # _________________PASSWORD STRENGHT VERIFICATION___________________
-        policy = PasswordPolicy.from_names(
+        """policy = PasswordPolicy.from_names(
             length=8,  # min length: 8
             uppercase=0,  # need min. 1 uppercase letters
             numbers=1,  # need min. 1 digits
@@ -70,7 +70,7 @@ def inscription(request):
         test_password_strenght = policy.test(password)
         for t in test_password_strenght:
             password_strenght_error = True
-            return render(request,'accueil/inscription.html',locals())
+            return render(request,'accueil/inscription.html',locals())"""
         # ________________TEST PASSWORD EQUAL_________________________
         if password != password2:
             password_equal_error = True
