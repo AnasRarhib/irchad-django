@@ -18,6 +18,11 @@ class ConnectionForm(forms.Form):
 class CreateSession(forms.Form):
     file = forms.FileField(required=True,widget=forms.FileInput(attrs={'id': 'fileupload', 'class': 'form-control'}))
 
+
+class ContactUs(forms.Form):
+    message = forms.CharField(widget=forms.Textarea(attrs={'id':'message','class':'message','class':'input-forms'}))
+    mail = forms.CharField(required=True,max_length=40,widget=forms.EmailField(attrs={'name':'mail','class':'input-form','id':'mail'}))
+    objet = forms.CharField(required=True,max_length=55,widget=forms.TextInput('name':'objet','id':'objet','class':'input-form'))
 """"
 class ContactUsForm(forms.Form):
     email = forms.EmailField(required=True,max_length=20,widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Votre Email *'}))

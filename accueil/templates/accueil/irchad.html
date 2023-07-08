@@ -13,6 +13,10 @@ Déposez Votre CV
 Bienvenue dans votre session !
 {% endif %}
 {% endblock %}
+{% block services %} <li class="nav-item"><a class="nav-link" href="{% url 'accueil' %}">à propos</a></li>{% endblock %}
+{% block aPropos %}  <li class="nav-item"><a class="nav-link" href="{% url 'accueil' %}">à propos</a></li>{% endblock %}
+{% block contact %}  <li class="nav-item"><a class="nav-link" href="{% url 'accueil' %}">à propos</a></li>{% endblock %}
+
 {% block body %}
 <!--________________________________CHAT BLOCK_______________________________-->
 {% if connected %}
@@ -161,7 +165,7 @@ Bienvenue dans votre session !
 
 {% else %}
     <div>
-        Description de irchad plus button pour s'inscrir !
+       
     </div>
 {% endif %}
 {% endblock %}

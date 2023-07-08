@@ -183,7 +183,8 @@ def irchad (request,session_id):
                         else:
                             form_extension_valid = False
                             return render(request,"accueil/irchad.html",locals())
-
+    else :
+        return seConnecter(request)
     return render(request,"accueil/irchad.html",locals())
 
 def getMessages(request,session_id):

@@ -22,10 +22,10 @@
         <div class="container"><a class="navbar-brand" href="{% url 'accueil' %}"><img src="{% static 'img/IRCHAD_LOGO.PNG'%}" style="width:100px;height:100px"/></a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto ">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'irchad' 0 %}" >Irchad</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#header" >Irchad</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Tawjih</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#portfolio">CorrectionCV</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">à propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'irchad' 0 %}">CorrectionCV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#aPropos">à propos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     {% if connected == False %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'inscription' %}">Inscription&nbsp;</a></li>
@@ -38,7 +38,7 @@
         </div>
     </nav>
 {% block backgroundNav %}
-    <header class="text-center text-white d-flex masthead" style="background-image: url('{% static 'assets/img/header.jpg' %}');">
+    <header class="text-center text-white d-flex masthead" style="background-image: url('{% static 'assets/img/header.jpg' %}');" id="header">
         <div class="container my-auto">
 
                 <div class="row">
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container" id="aPropos">
             <div class="row">
                 <div class="col-md-6 col-lg-3 text-center">
                     <div class="mx-auto service-box mt-5"><i class="fa fa-question-circle fa-4x text-primary mb-3 sr-icons" data-aos="zoom-in" data-aos-duration="200" data-aos-once="true"></i>
@@ -111,48 +111,48 @@
                 <div class="col-sm-6 col-lg-4"><a class="portfolio-box" href="{% static 'assets/img/fullsize/1.jpg' %}"><img class="img-fluid" src="{% static 'assets/img/thumbnails/1.jpg' %}">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded"><span>Category</span></div>
-                                <div class="project-name"><span>Project Name</span></div>
+                                <div class="project-category text-faded"></div>
+                                <div class="project-name"></div>
                             </div>
                         </div>
                     </a></div>
                 <div class="col-sm-6 col-lg-4"><a class="portfolio-box" href="{% static 'assets/img/fullsize/2.jpg' %}"><img class="img-fluid" src="{% static 'assets/img/thumbnails/2.jpg'%}">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded"><span>Category</span></div>
-                                <div class="project-name"><span>Project Name</span></div>
+                                <div class="project-category text-faded"></div>
+                                <div class="project-name"></div>
                             </div>
                         </div>
                     </a></div>
                 <div class="col-sm-6 col-lg-4"><a class="portfolio-box" href="{% static 'assets/img/fullsize/3.jpg' %}"><img class="img-fluid" src="{% static 'assets/img/thumbnails/3.jpg'%}">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded"><span>Category</span></div>
-                                <div class="project-name"><span>Project Name</span></div>
+                                <div class="project-category text-faded"></div>
+                                <div class="project-name"></div>
                             </div>
                         </div>
                     </a></div>
                 <div class="col-sm-6 col-lg-4"><a class="portfolio-box" href="{% static 'assets/img/fullsize/4.jpg' %}"><img class="img-fluid" src="{% static 'assets/img/thumbnails/4.jpg'%}">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded"><span>Category</span></div>
-                                <div class="project-name"><span>Project Name</span></div>
+                                <div class="project-category text-faded"></div>
+                                <div class="project-name"><</div>
                             </div>
                         </div>
                     </a></div>
                 <div class="col-sm-6 col-lg-4"><a class="portfolio-box" href="{% static 'assets/img/fullsize/5.jpg' %}"><img class="img-fluid" src="{% static 'assets/img/thumbnails/5.jpg' %}">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded"><span>Category</span></div>
-                                <div class="project-name"><span>Project Name</span></div>
+                                <div class="project-category text-faded"></div>
+                                <div class="project-name"></div>
                             </div>
                         </div>
                     </a></div>
                 <div class="col-sm-6 col-lg-4"><a class="portfolio-box" href="{% static 'assets/img/fullsize/6.jpg' %}"><img class="img-fluid" src="{% static 'assets/img/thumbnails/6.jpg' %}">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded"><span>Category</span></div>
-                                <div class="project-name"><span>Project Name</span></div>
+                                <div class="project-category text-faded"></div>
+                                <div class="project-name"></div>
                             </div>
                         </div>
                     </a></div>
@@ -178,7 +178,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 text-center mx-auto">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <h2 class="section-heading">Nous Contacter</h2>
                     <hr class="my-4">
                     <p class="mb-5">Nous sommes là pour vous aider à atteindre vos objectifs,
                         si vous avez des questions n'hésitez pas à nous contacter</p>
@@ -186,10 +186,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 text-center ms-auto"><i class="fa fa-phone fa-3x mb-3 sr-contact" data-aos="zoom-in" data-aos-duration="300" data-aos-once="true"></i>
-                    <p>123-456-6789</p>
+                    <p><i class="fa fa-instagram" aria-hidden="true"></i>irchad_tawjih </p>
                 </div>
                 <div class="col-lg-4 text-center me-auto"><i class="fa fa-envelope-o fa-3x mb-3 sr-contact" data-aos="zoom-in" data-aos-duration="300" data-aos-delay="300" data-aos-once="true"></i>
-                    <p><a href="mailto:your-email@your-domain.com">email@example.com</a></p>
+                    <p><a href="mailto:your-email@your-domain.com">irchadtawjih23@gmail.com</a></p>
                 </div>
             </div>x
         </div>
